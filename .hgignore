@@ -1,0 +1,9 @@
+syntax: glob
+
+
+*~
+*.class
+*.jar
+*conflicted copy*
+build/*
+dist/*
