@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package afro;
 
 import afro.feeds.Entry;
@@ -26,19 +22,24 @@ import org.xml.sax.SAXException;
 public class MyChannel {
 
     private static final String[] FEEDS_URL = new String[]{
-        "http://twitter.com/statuses/user_timeline/48274520.rss",
-        "http://identi.ca/api/statuses/user_timeline/dmn.atom",
-        "http://dmn.jogger.pl/atom/short/100/",
-        "http://www.google.com/reader/public/atom/user%2F12890149063310591021%2Fstate%2Fcom.google%2Fstarred",
-        "http://dmn.posterous.com/rss.xml"};
+//        "http://twitter.com/statuses/user_timeline/48274520.rss",
+//        "http://identi.ca/api/statuses/user_timeline/dmn.atom",
+//        "http://dmn.jogger.pl/atom/short/100/",
+//        "http://www.google.com/reader/public/atom/user%2F12890149063310591021%2Fstate%2Fcom.google%2Fstarred",
+//        "http://dmn.posterous.com/rss.xml",
+//		"http://devsite.pl/rss.xml",
+//		"http://devsite.pl/index.html",
+//		"/home/dmn/Pulpit/netvibes-short.htm",
+		"/home/dmn/delicious-short.html",
+
+//		"http://www.ppe.pl/index.php",
+//		" http://monkeyisland.pl/feed/",
+//		"/media/Home/dmn/Dropbox/Projects/src.dmn.bitbucket.org/output/rss.xml"
+//		"/media/Home/dmn/Dropbox/Projects/src.dmn.bitbucket.org/output/index.html"
+//		"/mnt/ram/c.xml",
+	};
 
     public MyChannel() {
-    }
-
-    public static String getSimpleFeedName(String url) {
-        int p1 = url.indexOf("://");
-        int p2 = url.indexOf('/', p1 + 3);
-        return url.substring(p1 + 3, p2);
     }
 
     public void printResults() {
@@ -56,7 +57,7 @@ public class MyChannel {
         for (String feedUrl : FEEDS_URL) {
             try {
                 Leaf root = new DefaultXmlParser(feedUrl).parse();
-                FeedExtractorFactory factory = new FeedExtractorFactory(myHandler, getSimpleFeedName(feedUrl));
+                FeedExtractorFactory factory = new FeedExtractorFactory(myHandler, feedUrl);
                 ExtractorInterface extractor = factory.getExtractor(root);
                 extractor.extract();
             } catch (ParserConfigurationException ex) {
@@ -67,6 +68,7 @@ public class MyChannel {
                 Logger.getLogger(MyChannel.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+		System.err.println("MyChannel.java:68");
         Collections.sort(myHandler.entries);
     }
 

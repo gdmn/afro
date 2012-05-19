@@ -6,6 +6,9 @@ package afro.feeds;
 
 import afro.xmlextractor.ExtractorInterface;
 import afro.xmltree.Leaf;
+import java.io.IOException;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -20,7 +23,7 @@ public class FeedRssExtractor extends FeedAtomExtractor implements ExtractorInte
     }
 
     @Override
-    public void extract() {
+	public void extract() {
         Leaf channelLeaf = xml.getFirst("channel");
         for (Leaf itemLeaf : channelLeaf.getAll("item")) {
             afro.feeds.Entry entry = new Entry();
@@ -33,7 +36,7 @@ public class FeedRssExtractor extends FeedAtomExtractor implements ExtractorInte
             entry.setHref(linkLeaf == null ? "" : linkLeaf.getContent());
 
             Leaf pubDateLeaf = itemLeaf.getFirst("pubDate");
-            entry.setUpdated(pubDateLeaf == null ? null : Entry.parseDate(DATE_FORMAT, pubDateLeaf.getContent()));
+            entry.setUpdated(pubDateLeaf == null ? null : Entry.parseDate(pubDateLeaf.getContent()));
 
             Leaf descriptionLeaf = itemLeaf.getFirst("description");
             entry.setContent(descriptionLeaf == null ? null : descriptionLeaf.getContent());

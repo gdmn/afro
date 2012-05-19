@@ -7,6 +7,9 @@ package afro.feeds;
 import afro.xmlextractor.ExtractorInterface;
 import afro.xmltree.Attribute;
 import afro.xmltree.Leaf;
+import java.io.IOException;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -26,7 +29,7 @@ public class FeedAtomExtractor implements ExtractorInterface {
         this.feedName = feedName;
     }
 
-    public void extract() {
+	public void extract() {
         for (Leaf entryLeaf : xml.getAll("entry")) {
             afro.feeds.Entry entry = new Entry();
             entry.setFeedName(feedName);
@@ -41,14 +44,14 @@ public class FeedAtomExtractor implements ExtractorInterface {
             Leaf updatedLeaf = entryLeaf.getFirst("updated");
             if (updatedLeaf != null) {
                 if (updatedLeaf.getContent().endsWith("Z")) {
-                    entry.setUpdated(Entry.parseDate(DATE_FORMAT, updatedLeaf.getContent()));
+                    entry.setUpdated(Entry.parseDate(updatedLeaf.getContent()));
                 } else {
                     String d = updatedLeaf.getContent();
                     int p = d.lastIndexOf(':');
                     if (p == d.length()-3) {
                         d = d.substring(0, p)+d.substring(p+1);
                     }
-                    entry.setUpdated(Entry.parseDate(DATE_FORMAT2, d));
+                    entry.setUpdated(Entry.parseDate(d));
                 }
             }
 
