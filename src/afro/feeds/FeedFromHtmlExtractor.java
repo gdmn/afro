@@ -1,6 +1,5 @@
 package afro.feeds;
 
-import afro.MyChannel;
 import afro.xmlextractor.ExtractorInterface;
 import afro.xmltree.Leaf;
 import afro.xmltree.xmlparser.DefaultXmlParser;

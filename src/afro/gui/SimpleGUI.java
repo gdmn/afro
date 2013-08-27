@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package afro.gui;
 
 import afro.xmltree.Leaf;
@@ -80,10 +76,10 @@ public class SimpleGUI
         add(splitPane);
     }
 
-    /** 
+    /**
      * Required by the ActionListener interface.
      * Handle events on the showDescendant and
-     * showAncestore buttons. 
+     * showAncestore buttons.
      */
     @Override
     public void actionPerformed(ActionEvent action) {

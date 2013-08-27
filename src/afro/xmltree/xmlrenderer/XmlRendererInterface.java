@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package afro.xmltree.xmlrenderer;
 
 import afro.xmltree.Leaf;
@@ -28,7 +23,7 @@ public interface XmlRendererInterface {
 //    static final String[] RAWCLOSE= new String[] {CDATACLOSE, "</code>", "</pre>"};
     static final String[] RAWOPEN= new String[] {CDATAOPEN};
     static final String[] RAWCLOSE= new String[] {CDATACLOSE};
-    
+
     String render(Leaf root);
     String render(LeafList list);
 }
