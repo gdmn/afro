@@ -41,12 +41,20 @@ public class HrefLister {
     }
 
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
+		args = new String[] {"/mnt/ram/index.html"};
 		if (args.length == 0) {
+/*TODO: format: https://feeds.pinboard.in/rss/u:dmn/
+Exception in thread "main" java.lang.StringIndexOutOfBoundsException: String index out of range: -3
+	at java.lang.String.substring(String.java:1911)
+	at afro.feeds.FeedExtractorFactory.getSimpleFeedName(FeedExtractorFactory.java:109)
+	at afro.feeds.FeedExtractorFactory.<init>(FeedExtractorFactory.java:24)
+	at afro.HrefLister.parse(HrefLister.java:30)
+	at afro.HrefLister.main(HrefLister.java:60)*/
 
 			System.out.println("Lists hrefs from feeds.\n"
 					+ "Usage:\n"
 					+ "\t"+HrefLister.class.getSimpleName()+" href1 href2...");
-			
+
 			System.exit(1);
 		}
 

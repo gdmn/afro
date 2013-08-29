@@ -33,6 +33,9 @@ public class FeedExtractorFactory {
 		if ("rss".equals(feedRootName.toLowerCase())) {
 			return new FeedRssExtractor(feedRoot, entryHandler, feedName);
 		}
+		if ("rdf:rdf".equals(feedRootName.toLowerCase())) {
+			return new FeedRdfExtractor(feedRoot, entryHandler, feedName);
+		}
 		if (feedRoot.getFirst("entry") != null) {
 			return new FeedAtomExtractor(feedRoot, entryHandler, feedName);
 		}

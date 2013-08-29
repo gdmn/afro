@@ -7,16 +7,15 @@ import afro.xmltree.Leaf;
  *
  * @author dmn
  */
-public class FeedRssExtractor extends FeedAtomExtractor implements ExtractorInterface {
+public class FeedRdfExtractor extends FeedAtomExtractor implements ExtractorInterface {
 
-    public FeedRssExtractor(Leaf rootElement, EntryHandler entryHandler, String feedName) {
+    public FeedRdfExtractor(Leaf rootElement, EntryHandler entryHandler, String feedName) {
         super(rootElement, entryHandler, feedName);
     }
 
     @Override
 	public void extract() {
-        Leaf channelLeaf = xml.getFirst("channel");
-        for (Leaf itemLeaf : channelLeaf.getAll("item")) {
+        for (Leaf itemLeaf : xml.getAll("item")) {
             afro.feeds.Entry entry = new Entry();
             entry.setFeedName(feedName);
 
@@ -26,7 +25,7 @@ public class FeedRssExtractor extends FeedAtomExtractor implements ExtractorInte
             Leaf linkLeaf = itemLeaf.getFirst("link");
             entry.setHref(linkLeaf == null ? "" : linkLeaf.getContent());
 
-            Leaf pubDateLeaf = itemLeaf.getFirst("pubDate");
+            Leaf pubDateLeaf = itemLeaf.getFirst("dc:date");
             entry.setUpdated(pubDateLeaf == null ? null : Entry.parseDate(pubDateLeaf.getContent()));
 
             Leaf descriptionLeaf = itemLeaf.getFirst("description");
